@@ -1,2 +1,2 @@
 # zaytona-city-website
-/html.zaytonacitywebsite.net
+zaytonacitywebsite.net
