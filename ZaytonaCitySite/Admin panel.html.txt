@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم المسؤول</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    .app-box {
+      background-color: #2a003b;
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      width: 80%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    .btn {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .accept {
+      background-color: #28a745;
+      color: white;
+    }
+    .reject {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>لوحة مراجعة التقديمات</h1>
+  <div id="adminApps"></div>
+
+  <script>
+    const adminEmail = "zaytona777@gmail.com";
+    const adminPassword = "zizitona111";
+    const loggedIn = localStorage.getItem("loggedInUser");
+
+    // التحقق من أن المستخدم هو المسؤول
+    if (loggedIn !== adminEmail) {
+      document.body.innerHTML = '<h2>هذه الصفحة مخصصة فقط للمسؤول.</h2>';
+    } else {
+      const apps = JSON.parse(localStorage.getItem("applications") || "[]");
+      const container = document.getElementById("adminApps");
+
+      if (apps.length === 0) {
+        container.innerHTML = '<p>لا توجد طلبات حالياً.</p>';
+      }
+
+      apps.forEach((app, index) => {
+        const box = document.createElement("div");
+        box.className = "app-box";
+
+        const title = document.createElement("h3");
+        title.textContent = `تقديم من: ${app.username}`;
+
+        const answers = document.createElement("p");
+        answers.textContent = `الإجابات: ${app.answers.slice(0, 3).join(" | ")} ...`;
+
+        const acceptBtn = document.createElement("button");
+        acceptBtn.textContent = "قبول";
+        acceptBtn.className = "btn accept";
+        acceptBtn.onclick = () => updateStatus(index, "accepted");
+
+        const rejectBtn = document.createElement("button");
+        rejectBtn.textContent = "رفض";
+        rejectBtn.className = "btn reject";
+        rejectBtn.onclick = () => updateStatus(index, "rejected");
+
+        box.appendChild(title);
+        box.appendChild(answers);
+        box.appendChild(acceptBtn);
+        box.appendChild(rejectBtn);
+        container.appendChild(box);
+      });
+    }
+
+    function updateStatus(index, status) {
+      const apps = JSON.parse(localStorage.getItem("applications") || "[]");
+      apps[index].status = status;
+      localStorage.setItem("applications", JSON.stringify(apps));
+      location.reload();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الملف الشخصي</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+      text-align: center;
+    }
+    .profile-container {
+      background-color: #2a003b;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    .btn {
+      margin: 10px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <img id="profileImage" src="" alt="الصورة الشخصية">
+    <h2 id="profileName"></h2>
+    <button class="btn" onclick="goToSettings()">الإعدادات</button>
+    <button class="btn" onclick="goToApplications()">تقديماتي</button>
+    <button class="btn" onclick="logout()">تسجيل الخروج</button>
+  </div>
+
+  <script>
+    const username = localStorage.getItem("loggedInUser");
+    const profilePic = localStorage.getItem("userProfilePic");
+
+    if (!username) {
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("profileName").textContent = username;
+      if (profilePic) {
+        document.getElementById("profileImage").src = profilePic;
+      } else {
+        document.getElementById("profileImage").src = "https://via.placeholder.com/120";
+      }
+    }
+
+    function goToSettings() {
+      alert("سيتم توجيهك إلى صفحة الإعدادات (سيتم إنشاؤها).");
+    }
+
+    function goToApplications() {
+      alert("سيتم توجيهك إلى صفحة التقديمات (سيتم إنشاؤها).");
+    }
+
+    function logout() {
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

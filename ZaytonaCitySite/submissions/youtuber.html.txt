@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم يوتيوبر</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "رابط قناتك على يوتيوب؟",
+      "كم عدد المشتركين لديك؟",
+      "كم عدد الفيديوهات الخاصة بـ MTA؟",
+      "هل سبق وأن صورت في سيرفرنا؟",
+      "كم عدد مشاهداتك الشهرية؟",
+      "هل تتفاعل مع المتابعين؟",
+      "ما نوع المحتوى الذي تقدمه؟",
+      "هل تلتزم بقوانين السيرفر أثناء التصوير؟",
+      "هل تقوم بالبثوث المباشرة؟",
+      "هل تعرف شروط الحصول على رتبة يوتيوبر؟",
+      "ما الأدوات التي تستخدمها للتسجيل؟",
+      "هل لديك حسابات أخرى على مواقع التواصل؟",
+      "كم فيديو تنوي رفعه شهرياً عن السيرفر؟",
+      "ما هي خطتك للترويج للسيرفر؟",
+      "هل سبق وتم رفضك في تقديم سابق؟",
+      "هل تتقبل النقد البناء؟",
+      "هل توافق على إزالة الرتبة في حال مخالفة الشروط؟",
+      "هل صورت مقاطع تتضمن خرق رول بلاي؟",
+      "هل تكتب وصف شامل للفيديوهات؟",
+      "هل توضح اسم السيرفر وروابطه؟",
+      "هل ستقوم بإضافة التقديمات في وصف الفيديو؟",
+      "ما هو هدفك من التقديم؟",
+      "هل تستخدم مايك جيد؟",
+      "ما نوع المحتوى الذي تخطط له في السيرفر؟",
+      "هل سبق وتعرضت لباند؟",
+      "هل تنوي التعاون مع لاعبين آخرين؟",
+      "هل ستستمر بنشر محتوى السيرفر بانتظام؟",
+      "هل توافق على تعليمات الإدارة؟",
+      "هل لديك استفسار أو اقتراح؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

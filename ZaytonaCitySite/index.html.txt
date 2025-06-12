@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الصفحة الرئيسية - زيتونة سيتي</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      background-image: url('assets/1.png');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    header {
+      text-align: center;
+      padding: 100px 20px 40px;
+    }
+    h1 {
+      font-size: 40px;
+      color: white;
+    }
+    p {
+      font-size: 20px;
+      margin-top: -10px;
+    }
+    .btn-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .btn {
+      background-color: #5e00c2;
+      color: white;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    .glitch {
+      animation: glitch 1s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px red; }
+      25% { text-shadow: -2px -2px blue; }
+      50% { text-shadow: 2px -2px green; }
+      75% { text-shadow: -2px 2px purple; }
+      100% { text-shadow: 2px 2px red; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>سيرفر زيتونة سيتي يرحب بكم</h1>
+    <p>عيش تجربة فريدة داخل عالم MTA RP</p>
+    <div class="btn-container">
+      <a href="https://discord.gg/vrZdT9VP" class="btn">ديسكورد</a>
+      <a href="platforms.html" class="btn">منصاتنا</a>
+      <a href="forms.html" class="btn">التقديمات</a>
+      <a href="#" class="btn glitch">المتجر (قريباً)</a>
+      <a href="mtasa://zaytona.city" class="btn">العب الآن</a>
+    </div>
+  </header>
+</body>
+</html>

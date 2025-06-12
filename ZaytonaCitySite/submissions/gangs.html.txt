@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم فاكشنات عصابات</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "ما هو اسم العصابة التي ترغب بإنشائها أو الانضمام لها؟",
+      "ما سبب رغبتك بالانضمام أو إنشاء هذه العصابة؟",
+      "هل تعرف قوانين العصابات داخل السيرفر؟",
+      "اذكر بعض قوانين العصابات المهمة؟",
+      "ما الفرق بين الحرب IC والحرب OOC؟",
+      "هل يجوز لك سرقة بنك بدون تنسيق مع الإدارة؟",
+      "هل تعرف ما هو Turf system؟",
+      "ما هو المطلوب لبدء حرب Turf؟",
+      "هل يجوز التحالف بين أكثر من عصابتين؟",
+      "كم عدد أعضاء العصابة المطلوبة للاعتراف بها؟",
+      "ما هو زمن التبليغ قبل الحرب؟",
+      "هل تعرف كيف تقدم تقارير العصابة؟",
+      "هل يمكنك إدارة أعضاء العصابة والتنسيق بينهم؟",
+      "ما هي مسؤوليات الليدر داخل العصابة؟",
+      "هل سبق وأن كنت عضوًا في عصابة؟",
+      "ما اسم العصابة السابقة (إن وجد)؟",
+      "هل تم طردك من عصابة سابقًا؟ ولماذا؟",
+      "هل تفهم نظام الRoleplay داخل العصابات؟",
+      "هل يجوز مهاجمة الشرطة بدون سبب؟",
+      "هل تعرف الفرق بين DM و RDM؟",
+      "ما هو موقفك من العصابات المخالفة للقوانين؟",
+      "هل تدعم استخدام /me و /do في المواقف؟",
+      "كيف تتصرف إذا تم القبض عليك من قبل الشرطة؟",
+      "ما رأيك في التنسيق بين العصابات والإدارة؟",
+      "اذكر مثالًا على سيناريو عصابة RP؟",
+      "هل تعرف استخدام الأسلحة المسموح بها؟",
+      "هل توافق على تطبيق العقوبات؟",
+      "هل تلتزم بحدود العصابة وعدم الخروج عن الدور؟",
+      "هل تقبل بتقييم العصابة من قبل الإدارة؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

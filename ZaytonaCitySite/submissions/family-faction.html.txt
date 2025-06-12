@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم امتلاك فاكشن عائلات</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "كم عمرك؟",
+      "ما هو اسم العائلة التي تريد إنشاؤها؟",
+      "ما هو سبب رغبتك في إنشاء هذه العائلة؟",
+      "كم عدد الأعضاء الذين تملكهم حالياً؟",
+      "هل لديك خبرة سابقة في قيادة الفاكشنات؟",
+      "ما هي أهداف عائلتك داخل السيرفر؟",
+      "ما هي الخطط التي تنوي تطبيقها في العائلة؟",
+      "هل تعرف قوانين الفاكشنات؟",
+      "كيف ستضمن احترام الأعضاء للقوانين؟",
+      "هل سبق وتمت معاقبتك داخل اللعبة؟ ولماذا؟",
+      "كيف ستقوم بتجنيد أعضاء جدد؟",
+      "هل تعرف استخدام أوامر الفاكشن؟",
+      "ما هي أولوياتك كليدر للعائلة؟",
+      "هل تعرف الفرق بين الـ IC والـ OOC؟",
+      "هل تمتلك ديسكورد خاص بعائلتك؟",
+      "هل تملك شعار وتصميم خاص بالعائلة؟",
+      "ما نوع النشاط الذي ستركز عليه؟ (قتال، اجتماعي، تجاري...)",
+      "كيف ستتعامل مع النزاعات داخل العائلة؟",
+      "هل تخطط للتفاعل مع فاكشنات أخرى؟",
+      "ما هو موقفك من احترام الفاكشنات الأخرى؟",
+      "هل تقبل بأن يتم تقييم أدائك كليدر؟",
+      "هل هناك مساعدون لديك؟ من هم؟",
+      "هل تستطيع التواجد بشكل يومي؟",
+      "ما عدد ساعات لعبك اليومي؟",
+      "هل ستقوم بفعاليات للعائلة؟",
+      "هل تنوي التقديم على تحالفات مستقبلية؟",
+      "كيف ستتجنب المشاكل مع الإدارة؟",
+      "هل تفهم مسؤوليات امتلاك فاكشن؟",
+      "هل توافق على جميع قوانين السيرفر؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم الدعم الفني</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما هو اسمك داخل اللعبة؟",
+      "كم عمرك؟",
+      "هل لديك خبرة في الدعم الفني؟",
+      "هل سبق لك أن عملت كستاف؟ وأين؟",
+      "ما هو تعريفك للدعم الفني داخل السيرفر؟",
+      "ما هي مسؤوليات عضو الدعم الفني؟",
+      "هل لديك القدرة على حل المشاكل بدون تدخل إداري؟",
+      "ما الفرق بين مشاكل IC و OOC؟",
+      "كيف تتعامل مع لاعب يطلب مساعدتك وهو غاضب؟",
+      "ما هو الأمر /report؟",
+      "ما الفرق بين /pm و /report؟",
+      "هل تستخدم الأوامر بحذر ومسؤولية؟",
+      "كيف تتصرف إذا لم تعرف حل مشكلة معينة؟",
+      "هل يجب التحقق من صحة المشكلة قبل التصرف؟",
+      "هل سبق وتم تحذيرك أو معاقبتك من قبل الإدارة؟",
+      "هل لديك معرفة بقوانين السيرفر؟",
+      "اذكر 3 قوانين مهمة برأيك؟",
+      "ما هو metagaming؟",
+      "ما هو powergaming؟",
+      "ما هو new life rule؟",
+      "هل يجوز استخدام powers بدون دليل؟",
+      "كيف تتعامل مع شكوى كاذبة؟",
+      "ما هي أهم مهارة يجب أن يمتلكها الستاف؟",
+      "هل تعرف استخدام لوحة الإدارة؟",
+      "ما هي أوامر التحقق من اللاعب (/check مثلاً)؟",
+      "هل تعرف متى تستخدم /freeze أو /kick؟",
+      "متى يجب التواصل مع الأدمن مباشرة؟",
+      "هل لديك القدرة على ضبط النفس أثناء النزاعات؟",
+      "هل توافق على مراقبة أداءك؟",
+      "هل تقبل النقد لتحسين مستواك؟",
+      "اذكر موقف حصل لك وحلل طريقة تصرفك فيه؟",
+      "ما الفرق بين تنبيه وتحذير؟",
+      "هل تتحدث بأسلوب محترم دائماً؟",
+      "هل تفهم أن مهمتك هي المساعدة وليس السيطرة؟",
+      "هل تتعاون مع باقي الفريق؟",
+      "ما رأيك بوجود تدريب للستاف الجدد؟",
+      "هل تعتقد أن الوقت مهم في الرد على التذاكر؟",
+      "ما هو أفضل أسلوب لشرح القوانين للاعب جديد؟",
+      "كيف تتعامل مع لاعب يكرر المخالفات؟",
+      "هل تعرف معنى abuse؟",
+      "ما الفرق بين الإشراف العام والدعم الفني؟",
+      "هل سبق وأن ساعدت شخص بدون أن تكون ستاف؟",
+      "هل تعتقد أن جميع اللاعبين سواسية؟",
+      "ما أهمية التفاعل مع المجتمع داخل اللعبة؟",
+      "ما رأيك في الشخص الذي يستغل الرتب؟",
+      "هل لديك استعداد لتطوير مهاراتك؟",
+      "هل تفضل العمل الفردي أو الجماعي؟ ولماذا؟",
+      "هل تفهم أن بعض اللاعبين قد يختبرون صبرك؟",
+      "ما هو ردك على لاعب يستهزئ بخدمتك؟",
+      "هل ترى نفسك مؤهلاً فعلاً للمنصب؟",
+      "ما هو اقتراحك لتطوير نظام الدعم؟",
+      "ما هو /spec؟ ومتى تستخدمه؟",
+      "ما هو /warn؟ ومتى تستخدمه؟",
+      "هل تعلم ما هو abuse commands؟",
+      "كيف تتأكد أن اللاعب لا يكذب؟",
+      "ما هو /get؟ وهل تستخدمه لأي شخص؟",
+      "ما الفرق بين سؤال عادي وشكوى؟",
+      "هل تعتقد أن كل تذكرة يجب الرد عليها؟",
+      "ما موقفك من لاعب يسب الإدارة؟",
+      "هل تتصرف بدون مشاعر؟",
+      "هل تعتقد أن الدعم الفني يجب أن يكون صارماً؟",
+      "هل تحب مساعدة الناس؟",
+      "هل عندك مشكلة في العمل تحت ضغط؟",
+      "هل توافق على كتابة تقرير يومي؟",
+      "هل سبق وقيمت سيرفر أو خدمة؟",
+      "هل توافق على قرارات الإدارة حتى لو ضدك؟",
+      "هل تعرف قوانين العقوبات؟",
+      "ما هو رأيك بالعدل في المعاملة داخل السيرفر؟",
+      "هل توافق على التعاون مع الإدارة بكل شفافية؟",
+      "هل تستطيع التفرغ لأوقات العمل المطلوبة؟",
+      "هل عندك تجارب سابقة في الدعم التقني؟",
+      "ما هو طموحك داخل السيرفر؟",
+      "هل عندك اقتراح لتحسين تجربة الدعم؟",
+      "هل ترى نفسك قادر على التعامل مع التوتر؟",
+      "هل تريد الاستمرار مع الفريق لفترة طويلة؟",
+      "كلمة أخيرة تود إضافتها؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

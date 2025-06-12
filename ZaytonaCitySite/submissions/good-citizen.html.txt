@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم شارة المواطن الصالح</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "كم عمرك؟",
+      "هل تعرف قوانين السيرفر؟",
+      "ما هو تعريفك للمواطن الصالح داخل اللعبة؟",
+      "هل سبق أن خالفت القوانين؟ ولماذا؟",
+      "ما فائدة شارة المواطن الصالح؟",
+      "ما هي أولويات المواطن داخل المدينة؟",
+      "متى يجب التبليغ عن مخالف؟",
+      "هل يجوز التجمع بدون سبب منطقي؟",
+      "ما هو الـ Fear RP؟",
+      "كيف تتصرف إذا تم خطفك داخل اللعبة؟",
+      "هل يجوز استفزاز الشرطة؟",
+      "هل تعرف ما هو Metagaming؟",
+      "هل يجوز أخذ معلومات من خارج اللعبة؟",
+      "هل يجوز قتل شخص دون سبب منطقي؟",
+      "ما هو Power Gaming؟",
+      "هل يجوز استخدام /kill للهروب من الموقف؟",
+      "هل تؤيد النظام والقانون داخل السيرفر؟",
+      "ما هو الفرق بين المواطن والمجرم؟",
+      "هل يحق لك التدخل في شؤون الشرطة؟",
+      "هل يجوز سرقة سيارات الشرطة؟",
+      "هل تعرف استخدام /report؟",
+      "ما هي أهمية احترام اللاعبين؟",
+      "هل يجوز الرد بالإهانة؟",
+      "ما رأيك في النظام العادل داخل اللعبة؟",
+      "هل تؤيد وجود نظام عقوبات؟",
+      "ما الفرق بين العقوبة IC و OOC؟",
+      "هل يجوز سرقة بنك بدون ترتيب مسبق؟",
+      "هل تفهم ما هو New Life Rule؟",
+      "ما هو Random Deathmatch؟",
+      "هل يجب وجود سبب منطقي للاعتداء؟",
+      "هل تعرف معنى Roleplay؟",
+      "ما الفرق بين RP و RPG؟",
+      "هل تعرف استخدام أوامر الشرطة؟",
+      "هل تساعد الآخرين عند الحاجة؟",
+      "هل سبق وتم الإبلاغ عنك؟",
+      "ما سبب رغبتك بالحصول على الشارة؟",
+      "هل تحترم جميع اللاعبين؟",
+      "هل توافق على تحمل المسؤولية؟",
+      "هل تعرف استخدام /me و /do؟",
+      "هل تستخدم المايك أثناء اللعب؟",
+      "ما موقفك من اللاعبين السامين؟",
+      "هل تتابع الأخبار داخل اللعبة؟",
+      "هل تتبع التعليمات من الإدارة؟",
+      "هل تعرف استخدام القوانين بشكل صحيح؟",
+      "هل تحب التفاعل داخل المدينة؟",
+      "ما هو رأيك بالنظام الحالي في السيرفر؟",
+      "ما هو اقتراحك لتطوير المدينة؟",
+      "هل توافق على قرارات الإدارة حتى لو ضدك؟",
+      "هل تقبل بتقييم أدائك؟",
+      "هل تعتبر نفسك مثالاً للمواطن الصالح؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

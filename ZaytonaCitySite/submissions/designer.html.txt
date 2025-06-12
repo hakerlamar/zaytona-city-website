@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم رتبة مصمم</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "كم عمرك؟",
+      "هل لديك خبرة في التصميم؟",
+      "ما هي البرامج التي تستخدمها في التصميم؟",
+      "كم سنة من الخبرة لديك في مجال التصميم؟",
+      "هل سبق وأن صممت لسيرفرات أخرى؟",
+      "هل يمكنك مشاركة بعض من أعمالك؟",
+      "هل تجيد تصميم الشعارات؟",
+      "هل لديك خبرة في تصميم واجهات المستخدم (UI)؟",
+      "هل تجيد تعديل الصور؟",
+      "هل يمكنك تصميم لوجو مخصص للسيرفر؟",
+      "هل تفضل تصميم ثري دي أم تو دي؟",
+      "ما نوع التصاميم التي تحب العمل عليها؟",
+      "ما رأيك في تصميم موقع زريونة سيتي الحالي؟",
+      "هل أنت مستعد للعمل ضمن فريق؟",
+      "هل تلتزم بالمواعيد النهائية؟",
+      "هل يمكن الاعتماد عليك بشكل دائم؟",
+      "هل يمكنك تصميم فيديوهات قصيرة؟",
+      "هل تجيد تصميم محتوى للسوشيال ميديا؟",
+      "هل تجيد تصميم البوسترات والدعائيات؟",
+      "هل لديك خبرة في تصميم السكربتات (صور أو واجهات)؟",
+      "هل يمكنك تصميم خلفيات متحركة؟",
+      "هل تعرف استخدام أدوات الذكاء الاصطناعي في التصميم؟",
+      "هل توافق على شروط استخدام التصاميم داخل السيرفر فقط؟",
+      "هل سبق وتم رفضك من رتبة مصمم؟",
+      "ما هو هدفك من الحصول على رتبة مصمم؟",
+      "هل تقبل التقييم والنقد البنّاء؟",
+      "هل لديك القدرة على تطوير مهاراتك بشكل مستمر؟",
+      "هل سبق وعملت ضمن إدارة تصميم؟",
+      "هل توافق على أن يتم اختبارك قبل الانضمام للفريق؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>

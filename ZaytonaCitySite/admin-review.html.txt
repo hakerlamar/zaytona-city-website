@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مراجعة التقديمات</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    .application-box {
+      background-color: #2a003b;
+      border-radius: 15px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    .question {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .answer {
+      margin-bottom: 10px;
+      background-color: #36004d;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .btn {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .accept-btn {
+      background-color: #28a745;
+      color: white;
+    }
+    .reject-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>مراجعة التقديمات</h1>
+
+  <div class="application-box">
+    <p><strong>اسم المتقدم:</strong> <span id="applicantName">غير معروف</span></p>
+    <div id="applicationContent">
+      <!-- سيتم تحميل الأسئلة والإجابات هنا -->
+    </div>
+    <button class="btn accept-btn" onclick="acceptApplication()">قبول</button>
+    <button class="btn reject-btn" onclick="rejectApplication()">رفض</button>
+  </div>
+
+  <script>
+    // بيانات تجريبية - ستتغير لاحقًا لتكون ديناميكية
+    const sampleApplication = {
+      name: "Ahmed Zaytona",
+      answers: [
+        { question: "ما اسمك داخل اللعبة؟", answer: "ZaytonaX" },
+        { question: "هل سبق لك امتلاك رتبة؟", answer: "نعم، كنت ليدر سابقًا" },
+        { question: "ما فاكشنك المفضل؟", answer: "عصابات" }
+      ]
+    };
+
+    document.getElementById("applicantName").textContent = sampleApplication.name;
+    const container = document.getElementById("applicationContent");
+
+    sampleApplication.answers.forEach((item) => {
+      const q = document.createElement("p");
+      q.className = "question";
+      q.textContent = item.question;
+      const a = document.createElement("div");
+      a.className = "answer";
+      a.textContent = item.answer;
+      container.appendChild(q);
+      container.appendChild(a);
+    });
+
+    function acceptApplication() {
+      alert("✅ تم قبول المتقدم. سيتم إرسال إشعار بالقبول.");
+      // هنا يمكنك لاحقًا ربط النظام بإرسال إشعار فعلي
+    }
+
+    function rejectApplication() {
+      alert("❌ تم رفض المتقدم. سيتم إرسال إشعار بالرفض.");
+      // هنا يمكنك لاحقًا ربط النظام بإرسال إشعار فعلي
+    }
+  </script>
+</body>
+</html>

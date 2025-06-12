@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تقديم رتبة مصمم سكربتات</title>
+  <style>
+    body {
+      background-color: #1a001f;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      padding: 30px;
+    }
+    #question-box {
+      background-color: #2a003b;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #question {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    #answer {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+    #next-btn, #submit-btn {
+      margin-top: 20px;
+      padding: 10px 25px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #next-btn:hover, #submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="question-box">
+    <div id="question"></div>
+    <textarea id="answer" rows="4"></textarea>
+    <br>
+    <button id="next-btn">التالي</button>
+    <button id="submit-btn" style="display:none;">إرسال</button>
+  </div>
+
+  <script>
+    const questions = [
+      "ما اسمك داخل اللعبة؟",
+      "كم عمرك؟",
+      "هل تملك خبرة في برمجة السكربتات؟",
+      "ما هي اللغات البرمجية التي تتقنها؟",
+      "هل سبق لك أن برمجت سكربتات لسيرفرات MTA؟",
+      "كم سنة من الخبرة تمتلك؟",
+      "هل لديك أعمال سابقة؟",
+      "هل تستطيع مشاركة نموذج من أعمالك؟",
+      "هل تفهم قواعد البرمجة النظيفة؟",
+      "هل تتبع أسلوب Modular في البرمجة؟",
+      "هل تعرف الفرق بين client-side و server-side في MTA؟",
+      "كيف تتعامل مع الأخطاء في الكود؟",
+      "ما هو أفضل محرر كود تستخدمه؟",
+      "هل سبق وشاركت في تطوير مودات مع فريق؟",
+      "هل تعمل بشكل فردي أم ضمن فريق؟",
+      "ما نوع السكربتات التي تفضل تصميمها؟",
+      "هل تتعامل مع قواعد البيانات في MTA؟",
+      "هل تستخدم MySQL أو SQLite؟",
+      "هل يمكنك برمجة أنظمة تسجيل دخول؟",
+      "هل يمكنك التعامل مع الأكواد الأمنية؟",
+      "هل تتابع تحديثات MTA المستمرة؟",
+      "ما هي قدراتك في UI/UX داخل اللعبة؟",
+      "هل لديك خلفية عن تنسيق واجهات HTML و CSS داخل اللعبة؟",
+      "هل يمكنك برمجة نظام فاكشنات كامل؟",
+      "هل يمكنك عمل نظام اقتصاد؟",
+      "ما هو أكبر مشروع برمجي قمت به؟",
+      "هل تلتزم بالمواعيد عند تنفيذ المهام؟",
+      "هل تستطيع تقديم دعم للسكربتات التي تصممها؟",
+      "هل تتقبل التعديلات والمراجعة؟",
+      "هل تفضل العمل الحر أم مع إشراف؟"
+    ];
+
+    let current = 0;
+    const answers = [];
+
+    const questionEl = document.getElementById("question");
+    const answerEl = document.getElementById("answer");
+    const nextBtn = document.getElementById("next-btn");
+    const submitBtn = document.getElementById("submit-btn");
+
+    function loadQuestion() {
+      questionEl.textContent = questions[current];
+      answerEl.value = "";
+    }
+
+    nextBtn.addEventListener("click", () => {
+      answers.push(answerEl.value);
+      current++;
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        nextBtn.style.display = "none";
+        submitBtn.style.display = "inline-block";
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      alert("تم إرسال النموذج بنجاح. شكراً لتقديمك!");
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
